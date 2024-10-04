@@ -16,6 +16,8 @@ def main():
     for image_name in image_names:
         cleaned_image_name = re.sub(r'[^A-Za-z0-9-]', '', image_name)
         matching_rows = df[df["Cleaned_Name"] == cleaned_image_name]
+        if matching_rows.empty:
+            matching_rows = df[df["Cleaned_Name"].str.contains(cleaned_image_name.split('-')[0], case=False)] 
         matching_indices = matching_rows.index.tolist()
         for index in matching_indices:
             df.at[index, "Image_Name"] = f"{image_name}.png"
