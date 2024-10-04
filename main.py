@@ -12,6 +12,14 @@ def main():
     directory = "data/pokemon_images"
     image_names = [os.path.splitext(file)[0].strip().lower() for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))]
 
+    # Cycle through image names and map to df record containing corresponding pokemon information
+    for image_name in image_names:
+        cleaned_image_name = re.sub(r'[^A-Za-z0-9-]', '', image_name)
+        matching_rows = df[df["Cleaned_Name"] == cleaned_image_name]
+        matching_indices = matching_rows.index.tolist()
+        for index in matching_indices:
+            df.at[index, "Image_Name"] = f"{image_name}.png"
+
 
 if __name__ == "__main__":
     main()
