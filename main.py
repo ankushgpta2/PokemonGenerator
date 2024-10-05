@@ -22,6 +22,14 @@ def main():
         if matching_indices:
             for index in matching_indices:
                 df.at[index, "Image_Name"] = f"{image_name}.png"
+    
+    empty_rows = df[df["Image_Name"].isna()]
+    pokemon_with_no_images = empty_rows["Original_Name"].tolist()
+    try:
+        assert not pokemon_with_no_images
+    except:
+        raise AssertionError(f"Following pokemons exist that do not have a corresponding image: {', '.join(pokemon_with_no_images)}")
+
 
 
 if __name__ == "__main__":
