@@ -19,8 +19,9 @@ def main():
         if matching_rows.empty:
             matching_rows = df[df["Cleaned_Name"].str.contains(cleaned_image_name.split('-')[0], case=False)] 
         matching_indices = matching_rows.index.tolist()
-        for index in matching_indices:
-            df.at[index, "Image_Name"] = f"{image_name}.png"
+        if matching_indices:
+            for index in matching_indices:
+                df.at[index, "Image_Name"] = f"{image_name}.png"
 
 
 if __name__ == "__main__":
