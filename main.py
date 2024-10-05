@@ -23,6 +23,7 @@ def main():
             for index in matching_indices:
                 df.at[index, "Image_Name"] = f"{image_name}.png"
     
+    # Get all rows with empty values for Image Name column
     empty_rows = df[df["Image_Name"].isna()]
     pokemon_with_no_images = empty_rows["Original_Name"].tolist()
     try:
