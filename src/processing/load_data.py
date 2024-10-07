@@ -35,4 +35,12 @@ class LoadData:
             if matching_indices:
                 for index in matching_indices:
                     pokemon_info.at[index, "Image_Name"] = f"{image_name}.png"
-        return pokemon_info
+        
+        # Check if all pokemon have corresponding image 
+        empty_rows = pokemon_info[pokemon_info["Image_Name"].isna()]
+        pokemon_with_no_images = empty_rows["Original_Name"].tolist()
+        try:
+            assert not pokemon_with_no_images
+            return pokemon_info
+        except:
+            raise AssertionError(f"Following pokemons exist that do not have a corresponding image: {', '.join(pokemon_with_no_images)}")
