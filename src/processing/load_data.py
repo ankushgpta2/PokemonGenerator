@@ -24,7 +24,8 @@ class DataLoader:
         except:
             raise AssertionError(f"Following pokemons exist that do not have a corresponding image: {', '.join(pokemon_with_no_images)}")
 
-    def get_image_names(self, directory):
+    @staticmethod
+    def get_image_names(directory):
         return [os.path.splitext(file)[0].strip().lower() for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))]
 
     def map_images_to_info(self, image_names, pokemon_info):
