@@ -3,7 +3,7 @@ import os
 import re
 
 
-class LoadData:
+class DataLoader:
 
     def load_the_data(self):
         # Store cleaned name for each pokemon 
