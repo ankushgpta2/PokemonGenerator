@@ -5,10 +5,10 @@ from typing import List, Optional
 
 
 class DataLoader:
-    def __init__(self):
+    def __init__(self) -> None:
         self.pokemon_info = None
 
-    def load_the_data(self):
+    def load_the_data(self) -> None:
         # Store cleaned name for each pokemon 
         self.pokemon_info = pd.read_csv('data/Pokedex_Ver_SV2.csv')
         self.pokemon_info["Cleaned_Name"] = self.pokemon_info["Original_Name"].apply(lambda x: re.sub(r'[^A-Za-z0-9]', '', x.strip().lower()))
@@ -20,10 +20,10 @@ class DataLoader:
         self.pokemon_info = self.map_images_to_info(image_names)
     
     @staticmethod
-    def _get_image_names(directory):
+    def _get_image_names(directory: str) -> List[str]:
         return [os.path.splitext(file)[0].strip().lower() for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))]
 
-    def _map_images_to_info(self, image_names):
+    def _map_images_to_info(self, image_names: List[str]) -> pd.DataFrame:
         for image_name in image_names:
             cleaned_image_name = re.sub(r'[^A-Za-z0-9-]', '', image_name)
             matching_rows = self.pokemon_info[self.pokemon_info["Cleaned_Name"] == cleaned_image_name]
