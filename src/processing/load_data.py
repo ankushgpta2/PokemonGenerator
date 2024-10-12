@@ -33,6 +33,12 @@ class DataLoader:
             FileNotFoundError: If CSV or image directory does not exist.
             AssertionError: If any Pokemon in the dataset lacks a corresponding image.
         """
+        # Validate file paths
+        if not os.path.exists(csv_path):
+            raise FileNotFoundError(f"CSV file not found: {csv_path}")
+        if not os.path.exists(image_dir):
+            raise FileNotFoundError(f"Image directory not found: {image_dir}")
+            
         # Store cleaned name for each pokemon 
         self.pokemon_info = pd.read_csv('data/Pokedex_Ver_SV2.csv')
         self.pokemon_info["Cleaned_Name"] = self.pokemon_info["Original_Name"].apply(lambda x: re.sub(r'[^A-Za-z0-9]', '', x.strip().lower()))
