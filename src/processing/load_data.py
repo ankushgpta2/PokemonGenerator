@@ -18,11 +18,19 @@ class DataLoader:
         """
         self.pokemon_info: Optional[pd.DataFrame] = None
 
-    def load_the_data(self) -> None:
+    def load_the_data(self, csv_path: str = 'data/Pokedex_Ver_SV2.csv', image_dir: str = 'data/pokemon_images') -> None:
         """
         Load Pokemon data from CSV file, clean names, and map images to Pokemon information.
 
+        Args:
+            csv_path (str): Path to the Pokemon CSV file.
+            image_dir (str): Directory containing Pokemon images.
+
+        Returns:
+            pd.DataFrame: Processed Pokemon information DataFrame.
+
         Raises:
+            FileNotFoundError: If CSV or image directory does not exist.
             AssertionError: If any Pokemon in the dataset lacks a corresponding image.
         """
         # Store cleaned name for each pokemon 
