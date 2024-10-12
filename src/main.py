@@ -1,4 +1,4 @@
-from src.processing.load_data import DataLoader
+from processing.load_data import DataLoader
 
 
 def main():
