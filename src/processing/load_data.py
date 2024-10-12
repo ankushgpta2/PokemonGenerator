@@ -16,7 +16,7 @@ class DataLoader:
         """
         Initialize the DataLoader with an empty Pokemon information DataFrame.
         """
-        self.pokemon_info = None
+        self.pokemon_info: Optional[pd.DataFrame] = None
 
     def load_the_data(self) -> None:
         """
